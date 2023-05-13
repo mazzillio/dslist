@@ -1,9 +1,11 @@
 package com.mazzillio.DslistMazzillio.controllers;
 
+import com.mazzillio.DslistMazzillio.dto.GameDTO;
 import com.mazzillio.DslistMazzillio.dto.GameMinDTO;
 import com.mazzillio.DslistMazzillio.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,5 +20,9 @@ public class GameController {
     @GetMapping
     public List<GameMinDTO> ListGames(){
         return gameService.listAllGames();
+    }
+    @GetMapping(value = "/{id}")
+    public GameDTO ListGames(@PathVariable Long id){
+        return gameService.findById(id);
     }
 }
