@@ -3,6 +3,7 @@ package com.mazzillio.DslistMazzillio.services;
 import com.mazzillio.DslistMazzillio.dto.GameDTO;
 import com.mazzillio.DslistMazzillio.dto.GameMinDTO;
 import com.mazzillio.DslistMazzillio.entities.Game;
+import com.mazzillio.DslistMazzillio.projections.GameMinProjection;
 import com.mazzillio.DslistMazzillio.repositotiries.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,4 +26,10 @@ public class GameService {
         Game game = gameRepository.findById(id).get();
         return new GameDTO(game);
     }
+    @Transactional(readOnly = true)
+    public List<GameMinDTO> listByList(Long listId) {
+        List<GameMinProjection> games = gameRepository.searchByList(listId);
+        return games.stream().map(GameMinDTO::new).toList();
+    }
+
 }
