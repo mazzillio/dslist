@@ -1,0 +1,17 @@
+version: "3.7"
+services:
+  pg-dslist-docker:
+    image: postgres:14-alpine
+    container_name: dev-dslist-postgressql
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_PASSWORD: 1234
+    ports:
+      - 5435:5432
+    volumes:
+      - ./../containers/data/postgresql/data:/var/lib/postgresql/data
+    networks:
+      - dev-network
+networks:
+  dev-network:
+    driver: bridge
